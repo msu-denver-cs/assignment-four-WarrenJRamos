@@ -1,16 +1,20 @@
 <html>
 <head>
 <title>A very simple jQuery SPA</title>
+<link rel="stylesheet" href="styles.css"/>
 <script
     src="https://code.jquery.com/jquery-3.3.1.js"
     integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous"></script>
 </head>
 <body>
+    <h1>Warren's Car Factory</h1>
+    <p>Click on any of the buttons below to see the inventory of items.</p>
 
     <button onclick="fetch('parts', ['part_name'])">Parts</button>
     <button onclick="fetch('makes', ['name', 'country'])">Makes</button>
-    <button onclick="fetch('cars', ['make_title', 'model_title', 'vin_number', 'make_id', 'part_ids'])">Cars</button>
+    <button onclick="fetch('cars', ['model_title', 'vin_number', 'make_name', 'parts'])">Cars</button>
+    <!--<button onclick="makeFetchAll('cars', ['model_title', 'vin_number', 'make_id', 'part_ids'])">Cars</button>-->
 
 <div id="list">
 </div>
@@ -20,6 +24,13 @@ var fetch = function(which, fields) {
     $("#list").empty();
     $.get("http://localhost:3000/" + which + ".json", true)
     .done(function(json) {
+        if (which == "cars") {
+            $("#list").append("Warren's Cars");
+        } else if (which == "makes") {
+            $("#list").append("Warren's Makes");
+        } else if (which == "parts") {
+            $("#list").append("Warren's Parts");
+        }
         for (item in json) {
             lis = "<li>";
             for (field in fields) {
@@ -31,6 +42,27 @@ var fetch = function(which, fields) {
     })
     .fail(function(json){ console.log("fail"); })
 };
+/*
+var makeFetch = function(makes, carId) {
+    $("#list").empty();
+    $.get("http://localhost:3000/" + makes + ".json", true)
+    .done(function(json) {
+        for (item in json) {
+            lis = "<li>";
+            if (carId == item.id) {
+                list += json[item][carId];
+            }
+            lis += "</li>";
+            $("#list").append(lis);
+        }
+    })
+    .fail(function(json){ console.log("fail"); })
+};
+var makeFetchAll = function(which, fields, carId) {
+    fetch(which, fields);
+    makeFetch(which, 1);
+}
+*/
 </script>
 
 </body>
