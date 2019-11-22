@@ -42,27 +42,6 @@ var fetch = function(which, fields) {
     })
     .fail(function(json){ console.log("fail"); })
 };
-/*
-var makeFetch = function(makes, carId) {
-    $("#list").empty();
-    $.get("http://localhost:3000/" + makes + ".json", true)
-    .done(function(json) {
-        for (item in json) {
-            lis = "<li>";
-            if (carId == item.id) {
-                list += json[item][carId];
-            }
-            lis += "</li>";
-            $("#list").append(lis);
-        }
-    })
-    .fail(function(json){ console.log("fail"); })
-};
-var makeFetchAll = function(which, fields, carId) {
-    fetch(which, fields);
-    makeFetch(which, 1);
-}
-*/
 </script>
 
 </body>
